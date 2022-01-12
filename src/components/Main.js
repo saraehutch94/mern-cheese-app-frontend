@@ -4,7 +4,7 @@ import Index from "../pages/Index";
 import Show from "../pages/Show";
 
 function Main() {
-  const [cheese, setCheese] = useState(null);
+  const [cheese, setCheese] = useState([]);
 
   const URL = "https://mern-cheese-app.herokuapp.com/cheese/";
 
