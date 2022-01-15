@@ -10,6 +10,7 @@ function Index(props) {
   });
 
   const handleChange = (e) => {
+    if (!props.user) return;
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -17,6 +18,7 @@ function Index(props) {
   };
 
   const handleSubmit = (e) => {
+    if (!props.user) return;
     e.preventDefault();
     props.createCheese(form);
     setForm({
@@ -81,7 +83,7 @@ function Index(props) {
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value="Create Cheese" />
+        <input disabled={!props.user} type="submit" value="Create Cheese" />
       </form>
       {props.cheese ? loaded() : loading()}
     </section>

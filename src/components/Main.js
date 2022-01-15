@@ -1,13 +1,12 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Index from "../pages/Index";
 import Show from "../pages/Show";
 
-function Main() {
+function Main(props) {
   const [cheese, setCheese] = useState([]);
 
   const URL = "https://mern-cheese-app.herokuapp.com/cheese/";
-
   // index helper function
   const getCheese = async () => {
     const response = await fetch(URL);
@@ -55,18 +54,26 @@ function Main() {
     <main>
       <Switch>
         <Route exact path="/cheese">
-          <Index cheese={cheese} createCheese={createCheese} />
+          <Index
+            cheese={cheese}
+            createCheese={createCheese}
+            user={props.user}
+          />
         </Route>
         <Route
           path="/cheese/:id"
-          render={(props) => (
-            <Show
-              {...props}
-              cheese={cheese}
-              updateCheese={updateCheese}
-              deleteCheese={deleteCheese}
-            />
-          )}
+          render={(rp) =>
+            props.user ? (
+              <Show
+                {...rp}
+                cheese={cheese}
+                updateCheese={updateCheese}
+                deleteCheese={deleteCheese}
+              />
+            ) : (
+              <Redirect to="/cheese" />
+            )
+          }
         />
       </Switch>
     </main>
