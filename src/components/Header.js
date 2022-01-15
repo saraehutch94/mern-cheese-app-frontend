@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { login, logout } from "../services/firebase";
 
 function Header(props) {
   return (
@@ -6,6 +7,8 @@ function Header(props) {
       <Link to="/cheese">
         <div>Cheese App</div>
       </Link>
+      <button onClick={login}>Login</button>
+      <button onClick={logout}>Logout</button>
     </nav>
   );
 }
